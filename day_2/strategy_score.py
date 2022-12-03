@@ -10,8 +10,14 @@ rock_dict = {
     "points": {
         "X": draw_points + rock_points,
         "Y": win_points + paper_points,
-        "Z": lose_points + scissors_points
+        "Z": lose_points + scissors_points,
     },
+    "strategy": {
+        "X": lose_points + scissors_points,
+        "Y": draw_points + rock_points,
+        "Z": win_points + paper_points
+
+    }
 
 }
 
@@ -19,8 +25,12 @@ paper_dict = {
     "points": {
         "X": lose_points + rock_points,
         "Y": draw_points + paper_points,
-        "Z": win_points + scissors_points},
+        "Z": win_points + scissors_points
+    },
     "strategy": {
+        "X": lose_points + rock_points,
+        "Y": draw_points + paper_points,
+        "Z": win_points + scissors_points
 
     }
 }
@@ -29,7 +39,13 @@ scissors_dict = {
     "points": {
         "X": win_points + rock_points,
         "Y": lose_points + paper_points,
-        "Z": draw_points + scissors_points
+        "Z": draw_points + scissors_points,
+    },
+    "strategy": {
+        "X": lose_points + paper_points,
+        "Y": draw_points + scissors_points,
+        "Z": win_points + rock_points
+
     }
 }
 
@@ -58,4 +74,22 @@ def part_1(file):
     return total_points
 
 
+def part_2(file):
+    total_points = 0
+    with open(file) as f:
+        lines = f.readlines()
+
+        for line in lines:
+            round_points = 0
+            curr_round = line.strip().split(' ')
+
+            calc_round = player_1_dict.get(curr_round[0])['strategy']
+            player_2 = curr_round[1]
+            round_points += calc_round.get(player_2)
+
+            total_points += round_points
+    return total_points
+
+
 print(part_1('input.txt'))
+print(part_2('input.txt'))
