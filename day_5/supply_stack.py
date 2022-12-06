@@ -34,16 +34,28 @@ def parse_input(file):
 
 def part_1(file):
     instructions, stacks = parse_input(file)
-    # print(stacks)
-    # print(instructions)
+
+    for i in instructions:
+        num = instructions.get(i)[0]
+        from_stack = instructions.get(i)[1]
+        to_stack = instructions.get(i)[2]
+        moved_crates = (stacks[from_stack][:num])
+        moved_crates.reverse()
+
+        del stacks[from_stack][:num]
+
+        stacks[to_stack] = moved_crates + stacks[to_stack]
+    print(get_top_stacks(stacks))
+
+
+def part_2(file):
+    instructions, stacks = parse_input(file)
     for i in instructions:
         num = instructions.get(i)[0]
         # print(num)
         from_stack = instructions.get(i)[1]
         to_stack = instructions.get(i)[2]
         moved_crates = (stacks[from_stack][:num])
-        moved_crates.reverse()
-
         del stacks[from_stack][:num]
 
         stacks[to_stack] = moved_crates + stacks[to_stack]
@@ -59,3 +71,4 @@ def get_top_stacks(stacks):
 
 
 part_1('input.txt')
+part_2('input.txt')
