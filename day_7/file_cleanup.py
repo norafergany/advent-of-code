@@ -1,3 +1,4 @@
+# Thanks to https://github.com/hyper-neutrino/advent-of-code/blob/main/2022/day07p1.py for this solution
 def create_file_system(file):
     cwd = root = {}
     stack = []
@@ -31,20 +32,16 @@ def create_file_system(file):
         return root
 
 
-root = create_file_system('input.txt')
+root = create_file_system('test-input.txt')
 print(root)
 
 
 def calc_sizes(dir=root):
     size = 0
     total_size = 0
-    print("print dir ", dir)
     if type(dir) == int:
-        print("num ", dir)
-        # TODO understand recursion - what's happening with the return here and what happens to s, t
         return dir, 0
     for child in dir.values():
-        print(child)
         s, t = calc_sizes(child)
         size += s
         total_size += t
