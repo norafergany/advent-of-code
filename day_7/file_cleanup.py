@@ -51,3 +51,28 @@ def calc_sizes(dir=root):
 
 
 print(calc_sizes(root))
+
+def size(dir = root):
+    if type(dir) == int:
+        return dir
+    return sum(map(size, dir.values()))
+
+print(size(root))
+# def delete_size(dir=root):
+#     size = 0
+#     total_size = 0
+#     sizes = {}
+#     if type(dir) == int:
+#         return dir
+#     for key, child in dir.items():
+#         s = delete_size(child)
+#         print(size)
+#         print(s)
+#         size += s
+#         # total_size += t
+#     sizes[key] = size
+#
+#     return sizes
+#
+#
+# print(delete_size(root))
